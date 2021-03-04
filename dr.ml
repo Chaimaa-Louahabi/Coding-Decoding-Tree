@@ -25,7 +25,7 @@ struct
     let recompose lc =
     List.fold_right (fun t q -> String.make 1 t ^ q) lc ""
 end
-(*type chiffre=|0|1|2|3|4|5|6|7|8|9*)
+
 module DRNat:DecomposeRecompose with type mot=int and type symbole=int =
 struct
     type mot=int
@@ -49,11 +49,10 @@ struct
       résultat: une liste d'entiers entre 0 et 9 issues de la décomposotion de e
     *)
     let decompose e =           
-  (*match e with | 0 ->[]
-                            | _ -> (e mod 10) :: decompose ((e - e mod 10 )/10) 
-*)
-        let str = string_of_int e in
-        List.map int_of_char (decompose_chaine str)
+    match e with 
+    | 0 ->[]
+    | _ ->  (decompose ((e - e mod 10 )/10))@[e mod 10]
+
     (*reconstruire un entier à partir d'une lilste d'entiers compris entre 0et 9
       signature: decompose: int list-> int 
       paramètres: 
